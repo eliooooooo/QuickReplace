@@ -2,20 +2,30 @@
   "name": "quickreplace",
   "displayName": "QuickReplace",
   "description": "Create text replacement suggestions based on your own strings and paterns.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.91.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": ["*"],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "quickreplace.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+          "command": "extension.reloadPatterns",
+          "title": "Reload Patterns",
+          "category": "QuickReplace",
+          "description": "Reload the patterns from the configuration file."
+      },
+      {
+          "command": "extension.editPatterns",
+          "title": "Edit Patterns",
+          "category": "QuickReplace",
+          "description": "Edit the patterns in the configuration file."
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
@@ -23,12 +33,16 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.91.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
+    "@types/vscode": "^1.91.0",
     "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0"
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }
