@@ -14,48 +14,51 @@ function loadPatterns(context) {
 
 function activate(context) {
 	console.log('Extension "quickreplace" is now active!');
-	let patterns = loadPatterns(context);
+	let patterns_tmp = loadPatterns(context);
+	let patterns = patterns_tmp.patterns;
+
+	let events = [];
+	patterns.forEach(pattern => {
+		events.push(pattern.event);
+	});
+	console.log(events);
 	console.log(patterns);
 	
 	const provider = vscode.languages.registerCompletionItemProvider(
 		{ scheme: 'file', language: '*' },
 		{
-			provideCompletionItems(document, position) {
-				console.log(position);
-				console.log('document', document['fileName']);
+			provideCompletionItems(document, position, context) {
 				console.log('provideCompletionItems called');
 				const line = document.lineAt(position);
 				const completionItems = [];
 	
-				// Extraire la sous-chaîne de la ligne qui commence par '@' et se termine par le prochain espace ou la fin de la ligne
 				const text = line.text.substring(0, position.character);
 				const match = text.match(/@(\S*)$/);
 				const prefix = match ? match[1] : '';
-	
-				for (const key in patterns) {
-					console.log('key', key);
-					if (patterns.hasOwnProperty(key)) {
-						const value = patterns[key];
-						console.log('prefix', prefix);
-						if (key.startsWith(prefix)) {
-							const item = new vscode.CompletionItem(key, vscode.CompletionItemKind.Snippet);
-							item.detail = `Replace with: ${value}`;
+				console.log('prefix:', prefix);
 
-							const startPos = position.translate(0, -prefix.length - 1);
-							const endPos = position;
-							const range = new vscode.Range(startPos, endPos);
-							item.range = range;
+				const triggeredEvent = context.triggerCharacter;
+				console.log('triggeredEvent:', triggeredEvent);
 
-							item.insertText = value;
-							completionItems.push(item);
-						}
+				patterns.forEach(pattern => {
+					if (pattern.event === triggeredEvent) {
+						const item = new vscode.CompletionItem(pattern.pattern, vscode.CompletionItemKind.Snippet);
+						item.detail = `Replace with: ${pattern.content}`;
+				
+						const startPos = position.translate(0, -prefix.length - 1);
+						const endPos = position;
+						const range = new vscode.Range(startPos, endPos);
+						item.range = range;
+				
+						item.insertText = pattern.content;
+						completionItems.push(item);
 					}
-				}
+				});
 	
 				return completionItems;
 			}
 		},
-		'@'
+		...events
 	);
 	
 	context.subscriptions.push(provider);

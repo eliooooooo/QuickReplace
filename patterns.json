@@ -1,3 +1,19 @@
 {
-    "@test": "Use the “Edit Patterns” command to add your own patterns"
+    "patterns": [
+        {
+            "event": "@",
+            "pattern": "test",
+            "content": "Use the “Edit Patterns” command to add your own patterns"
+        },
+        {
+            "event": "|",
+            "pattern": "oui",
+            "content": "ouiouioui"
+        },
+        {
+            "event": "e",
+            "pattern": "vent",
+            "content": "lalallaallaal"
+        }
+    ]
 }
