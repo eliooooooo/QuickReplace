@@ -4,11 +4,12 @@
   "description": "Create text replacement suggestions based on your own strings and paterns.",
   "author": "BURKLE Eliott",
   "publisher": "BURKLEEliott",
+  "icon": "./src/logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/eliooooooo/QuickReplace"
   },
-  "version": "0.1.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.91.0"
   },
