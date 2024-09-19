@@ -1,19 +1,4 @@
 {
-    "patterns": [
-        {
-            "event": "@",
-            "pattern": "test",
-            "content": "Use the “Edit Patterns” command to add your own patterns"
-        },
-        {
-            "event": "|",
-            "pattern": "oui",
-            "content": "ouiouioui"
-        },
-        {
-            "event": "e",
-            "pattern": "vent",
-            "content": "lalallaallaal"
-        }
-    ]
+    "@quickreplace": "<div>\n  <h1>QuickReplace</h1>\n  <p>Here is an exemple</p>\n</div>",
+    "@test": "Use the “Edit Patterns” command to add your own patterns"
 }
