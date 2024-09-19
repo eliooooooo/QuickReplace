@@ -1,5 +1,9 @@
 # QuickReplace 📜
 
+<p align="center">
+  <img src="./src/logo.png" alt="Logo QuickReplace">
+</p>
+
 The QuickReplace extension helps you create VSCode completion suggestions, which will be replaced by the content of the pattern you have defined.
 
 ## Features
